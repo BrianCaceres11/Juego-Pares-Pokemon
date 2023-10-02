@@ -16,6 +16,8 @@ let clickAudio = new Audio('./Sonidos/click.wav');
 let rightAudio = new Audio('./Sonidos/right.wav');
 let wrongAudio = new Audio('./Sonidos/wrong.wav');
 
+document.getElementById("btn-reiniciar").addEventListener("click", reiniciarJuego);
+
 let mostrarMovimientos = document.getElementById("movimientos");
 
 let mostrarAciertos = document.getElementById("aciertos");
@@ -91,6 +93,25 @@ function destapar(id) {
             },700);
         }
     }
+}
 
+function reiniciarJuego() {
+    clearInterval(tiempoRegresivoId);
+    temporizador = false;
+    timer = timerInicial;
+    mostrarTiempo.innerHTML = `Tiempo: ${timer} segundos`;
+    mostrarMovimientos.innerHTML = `Movimientos: 0`;
+    mostrarAciertos.innerHTML = `Aciertos: 0`;
+    tarjetasDestapadas = 0;
+    movimientos = 0;
+    aciertos = 0;
 
+    numeros = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8]
+    numeros = numeros.sort(() => {return Math.random() - 0.5 });
+
+    for (let i = 0; i <= 15; i++) {
+        let tarjeta = document.getElementById(i);
+        tarjeta.innerHTML = '';
+        tarjeta.disabled = false;
+    }
 }
